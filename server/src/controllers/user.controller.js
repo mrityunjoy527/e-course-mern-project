@@ -1,6 +1,6 @@
 import { generateToken } from "../utils/jwt.js";
 import User from "../models/user.model.js";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcrypt";
 import { deletePhotoFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 
 const registerUser = async (req, res) => {
@@ -38,7 +38,7 @@ const loginUser = async (req, res) => {
     if (!user) {
       return res.status(500).json({ message: "Incorrect email or password" });
     }
-    const passwordMatched = await bcrypt.compare(password, user.password);
+    const passwordMatched = await bcryptjs.compare(password, user.password);
     if (!passwordMatched) {
       return res.status(500).json({ message: "Incorrect email or password" });
     }
