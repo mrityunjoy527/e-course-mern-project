@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import courseRouter from "./src/routes/course.route.js";
 import mediaRouter from "./src/routes/media.route.js";
 import transactionRouter from "./src/routes/courseTransaction.route.js";
-import courseProgressRouter from './src/routes/courseProgress.route.js';
+import courseProgressRouter from "./src/routes/courseProgress.route.js";
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 );
