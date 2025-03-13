@@ -1,8 +1,8 @@
 
-function ProfileDialog({children, className, show, removeDialog}) {
+function ProfileDialog({ children, className, show }) {
     return (
-        <div className="z-20" onClick={removeDialog}>
-            <ul className={className} hidden={!show}>
+        <div className="z-20" >
+            <ul className={className} hidden={!show} onClick={(e) => e.stopPropagation()}>
                 {...children}
             </ul>
         </div>

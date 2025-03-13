@@ -4,15 +4,14 @@ const baseUrl = "http://localhost:8080/api/user/auth";
 const useAuth = create((set) => ({
   user: null,
   isAuthenticated: false,
-  isLoggedOut: false,
+  isLoggedOut: true,
   setLoggedOut(value) {
-    set({isLoggedOut: value});
+    set({ isLoggedOut: value });
   },
   setData({ user, isAuthenticated }) {
     set({ user, isAuthenticated });
   },
   async registerUser(userdata) {
-    set({ isLoading: true });
     try {
       const options = {
         method: "POST",
@@ -23,15 +22,15 @@ const useAuth = create((set) => ({
       };
       const res = await fetch(`${baseUrl}/register`, options);
       const data = await res.json();
-      if (data?.user) {
+      if (data?.user)
         set(() => ({
           user: data.user,
           isAuthenticated: false,
         }));
-      }
+      console.log(data);
       return data;
     } catch (error) {
-      console.log("error", error);
+      console.error(error);
     }
   },
   async loginUser(userdata) {
@@ -46,12 +45,9 @@ const useAuth = create((set) => ({
       };
       const res = await fetch(`${baseUrl}/login`, options);
       const data = await res.json();
-      if (data?.user) {
-        set(() => ({ user: data.user, isAuthenticated: true }));
-      }
       return data;
     } catch (error) {
-      console.log("error", error);
+      console.error(error);
     }
   },
   async getUser() {
@@ -60,12 +56,10 @@ const useAuth = create((set) => ({
         credentials: "include",
       });
       const data = await res.json();
-      if (data?.user) {
-        set(() => ({ user: data.user, isAuthenticated: true }));
-      }
+      if (data?.user) set(() => ({ user: data.user, isAuthenticated: true }));
       return data;
     } catch (error) {
-      console.log("error", error);
+      console.error(error);
     }
   },
   async updateProfile(formData) {
@@ -77,19 +71,18 @@ const useAuth = create((set) => ({
       };
       const res = await fetch(`${baseUrl}/profile/update`, options);
       const data = await res.json();
-      if (data?.user) {
-        set(() => ({ user: data.user, isAuthenticated: true }));
-      }
+      if (data?.user) set(() => ({ user: data.user, isAuthenticated: true }));
       return data;
     } catch (error) {
-      console.log("error", error);
+      console.error(error);
     }
   },
   async logoutUser() {
     try {
       const res = await fetch(`${baseUrl}/logout`, { credentials: "include" });
       const data = await res.json();
-      set(() => ({ user: null, isAuthenticated: false }));
+      if (data?.isLoggedOut)
+        set(() => ({ user: null, isAuthenticated: false }));
       return data;
     } catch (error) {
       console.log("error", error);

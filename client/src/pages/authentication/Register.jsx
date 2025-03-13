@@ -1,65 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import useAuth from "../../utils/useAuth";
 import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
-import { Flip, toast, ToastContainer } from 'react-toastify';
-import Progress from "../../components/Progress";
+import { toast } from 'react-hot-toast';
+import Loader from "../../components/Loader";
 
 function Register() {
 
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit } = useForm();
     const [show, setShow] = useState(false);
     const [showOutline, setShowOutline] = useState(false);
     const { registerUser } = useAuth();
     const navigate = useNavigate();
 
-    const { mutateAsync: onRegister, status } = useMutation({
+    const { mutateAsync: onRegister, isLoading, isSuccess, data, error } = useMutation({
         mutationFn: registerUser,
     });
 
     async function onSubmit(userData) {
-        const toastId = toast(<Progress text="Registering..." />, {
-            theme: "dark",
-            closeButton: false,
-            customProgressBar: true,
-        }
-        );
-        const res = await onRegister(userData);
-        if (!res.user) {
-            toast.update(
-                toastId, {
-                render: res.message,
-                type: "error",
-                customProgressBar: false,
-                isLoading: false,
-                autoClose: 3000,
-            });
-        } else {
-            toast.update(
-                toastId, {
-                render: res.message,
-                customProgressBar: false,
-                type: "success",
-                isLoading: false,
-                autoClose: 3000,
-                onClose() {
-                    navigate("/login", { replace: true });
-                }
-            });
-        }
+        await onRegister(userData);
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            if (!data?.user) toast.error(data?.message ?? "Something went wrong!", { id: 2 });
+            else {
+                navigate("/login", { replace: true });
+                toast.success(data?.message, { id: 2 });
+            }
+        }
+        if (error) {
+            toast.error("Something went wrong!", { id: 2 });
+        }
+    }, [isSuccess, error]);
 
     return (
         <div
-            className="w-full px-4 pb-4 rounded-lg border-2 border-gray-300 flex flex-col gap-5 bg-white">
-            <ToastContainer
-                position="bottom-right"
-                transition={Flip}
-                pauseOnFocusLoss={false}
-            />
+            className="w-full p-4 rounded-lg border-2 border-gray-300 flex flex-col gap-5 bg-white">
             <div>
                 <span
                     className="text-base font-semibold" onClick={() => {
@@ -97,7 +77,7 @@ function Register() {
                     htmlFor="password"
                     className="text-base font-semibold">Password</label>
                 <div
-                    className={`flex items-center py-2 px-3 rounded-md ${!showOutline && "border border-gray-300"} gap-1 ${showOutline && "border-2 border-black"}`}>
+                    className={`flex items-center py-2 px-3 rounded-md outline ${!showOutline && "outline-1 outline-gray-300"} gap-1 ${showOutline && "outline-2 outline-black"}`}>
                     <input
                         {...register("password", { required: true })}
                         type={!show ? "password" : "text"}
@@ -117,9 +97,9 @@ function Register() {
                     }
                 </div>
                 <button
-                    disabled={status === "loading"}
-                    className="mt-4 py-2 px-4 bg-black text-white  font-semibold text-base w-fit rounded-lg active:scale-95 disabled:bg-gray-600 disabled:cursor-not-allowed">
-                    Register
+                    disabled={isLoading}
+                    className="mt-4 py-2 px-4 bg-black text-white font-semibold sm:text-base text-sm  w-fit rounded-lg active:scale-95 disabled:bg-gray-600 disabled:cursor-not-allowed">
+                    {isLoading ? <Loader className="h-5 w-5" text="Please wait..." col="white" /> : "Register"}
                 </button>
             </form>
         </div >
