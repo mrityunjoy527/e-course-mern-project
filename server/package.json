@@ -4,8 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "prestart": "stripe listen --forward-to https://skillsprint-backend-863b.onrender.com/api/purchase/webhook",
+    "customStart": "npm run prestart && npm start"
   },
   "keywords": [],
   "author": "",
