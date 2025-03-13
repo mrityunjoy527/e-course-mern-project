@@ -140,9 +140,15 @@ async function getCourseDetailsWithPurchaseStatus(req, res) {
     const purchased = await CourseTransaction.findOne({ courseId, userId });
     return res
       .status(200)
-      .json({ course, purchased: purchased ? true : false, ok: true });
+      .json({
+        course,
+        purchased: purchased && purchased.status === "completed" ? true : false,
+        ok: true,
+      });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to fetch course details", ok: false });
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch course details", ok: false });
   }
 }
 
