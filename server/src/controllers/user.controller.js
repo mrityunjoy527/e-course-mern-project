@@ -1,6 +1,6 @@
 import { generateToken } from "../utils/jwt.js";
 import User from "../models/user.model.js";
-import bcryptjs from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { deletePhotoFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 
 const registerUser = async (req, res) => {
