@@ -1,5 +1,5 @@
 import { create } from "zustand";
-const baseUrl = "http://localhost:8080/api/user/auth";
+const baseUrl = "https://skillsprint-backend-863b.onrender.com/api/user/auth";
 
 const useAuth = create((set) => ({
   user: null,
