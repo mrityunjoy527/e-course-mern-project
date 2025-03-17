@@ -78,10 +78,7 @@ const markAsCompleted = async (req, res) => {
   try {
     const { courseId } = req.params;
     const userId = req.id;
-    const courseProgress = await CourseProgress.findOne({ courseId, userId });
-    if (!courseProgress) {
-      return res.status(404).json({ message: "Course progress not found" });
-    }
+    const courseProgress = await CourseProgress.findOne({ courseId, userId }) ?? {};
     const course = await Course.findById(courseId);
     courseProgress.lectureProgress = [];
     course.lectures.forEach((lectureId) => {
@@ -104,10 +101,7 @@ const markAsInComplete = async (req, res) => {
   try {
     const { courseId } = req.params;
     const userId = req.id;
-    const courseProgress = await CourseProgress.findOne({ courseId, userId });
-    if (!courseProgress) {
-      return res.status(404).json({ message: "Course progress not found" });
-    }
+    const courseProgress = await CourseProgress.findOne({ courseId, userId }) ?? {};
     courseProgress.lectureProgress.forEach((lecture) => {
       lecture.viewed = false;
     });
