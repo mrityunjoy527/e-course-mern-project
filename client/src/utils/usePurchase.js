@@ -20,9 +20,12 @@ const usePurchase = create((set) => ({
   },
   async getCourseDetailsWithPurchaseStatus(courseId) {
     try {
-      const res = await fetch(`${baseUrl}/course/${courseId}/details-with-status`, {
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${baseUrl}/course/${courseId}/details-with-status`,
+        {
+          credentials: "include",
+        }
+      );
       const data = await res.json();
       return data;
     } catch (error) {

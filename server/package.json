@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "prestart": "stripe listen --forward-to https://skillsprint-backend-863b.onrender.com/api/purchase/webhook",
+    "prestart": "stripe listen --forward-to http://localhost:8080/api/purchase/webhook",
     "customStart": "npm run prestart && npm start"
   },
   "keywords": [],

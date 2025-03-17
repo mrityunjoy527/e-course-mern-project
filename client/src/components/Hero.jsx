@@ -14,7 +14,7 @@ function Hero() {
     }
 
     return (
-        <div className="flex flex-col gap-5 sm:py-14 px-3 py-10 items-center justify-end w-full from-blue-500 to-indigo-600 bg-gradient-to-r mt-[60px]">
+        <div className="flex flex-col gap-5 sm:py-14 px-3 py-10 items-center justify-end w-full from-indigo-500 to-indigo-600 bg-gradient-to-r mt-[60px]">
             <h2 className="text-white font-bold lg:text-4xl text-3xl text-center">Find the Best Courses for You</h2>
             <p className="text-white text-base text-center">Discover, Learn, and UpSkill with our wide range of courses</p>
             <form onSubmit={handleSearch} className="flex mt-3 items-center justify-center max-w-[35rem] w-full h-fit overflow-hidden shadow-lg rounded-full">

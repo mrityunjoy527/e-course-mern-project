@@ -5,7 +5,7 @@ import useEditProfileDialog from './utils/useEditProfileDialog';
 import useAuth from './utils/useAuth';
 import { useQuery } from 'react-query';
 import LoadingPage from './components/LoadingPage';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster,} from 'react-hot-toast';
 import useProfileDialog from './utils/useProfileDialog';
 
 function App() {

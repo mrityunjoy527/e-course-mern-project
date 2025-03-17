@@ -3,7 +3,6 @@ import { FiLogOut } from "react-icons/fi";
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import ProfileDialog from "./ProfileDialog";
-import { LuSchool } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../utils/useAuth";
 import { useMutation } from "react-query";
@@ -41,8 +40,8 @@ function Navbar() {
         <div className="w-screen fixed left-0 top-0 bg-white z-40 px-3 border-b-2 border-gray-100">
             <div className="flex max-w-screen-xl items-center mx-auto justify-between h-[60px]">
                 <Link to="/" className="flex items-center gap-3">
-                    <LuSchool className="h-8 w-8 hidden sm:block" />
-                    <h1 className="font-extrabold text-2xl">SkillSprint</h1>
+                    <img className="h-10 w-10 hidden text-indigo-600 sm:block" src="/skill.png" alt="" />
+                    <h1 className="font-extrabold text-indigo-500 text-2xl">SkillSprint</h1>
                 </Link>
                 <div className="flex items-center gap-3 sm:relative">
                     <IoMenu className="sm:hidden block h-9 w-9 cursor-pointer" onClick={(e) => {
