@@ -11,7 +11,7 @@ import LoadingPage from "../../components/LoadingPage";
 import { FiAlertCircle } from "react-icons/fi";
 import Loader from "../../components/Loader";
 
-const URL = "http://localhost:8080/api/media";
+const URL = "https://skillsprint-backend-863b.onrender.com/api/media";
 
 function EditLecture() {
 
