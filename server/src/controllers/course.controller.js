@@ -171,6 +171,7 @@ async function removeCourse(req, res) {
     await deletePhotoFromCloudinary(publicId);
     await CourseTransaction.deleteMany({ courseId: courseId });
     await Course.deleteOne({ _id: courseId });
+    await CourseTransaction.deleteMany({ courseId: courseId });
     return res
       .status(200)
       .json({ ok: true, message: "Course deleted successfully" });
