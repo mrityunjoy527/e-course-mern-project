@@ -1,5 +1,6 @@
 import { create } from "zustand";
-const baseUrl = "http://localhost:8080/api/course";
+import { courseUrl } from "../ignoreUrl/url";
+const baseUrl = courseUrl;
 
 const useCourse = create((set) => ({
   courses: null,

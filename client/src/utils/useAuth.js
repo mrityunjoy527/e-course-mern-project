@@ -1,5 +1,6 @@
 import { create } from "zustand";
-const baseUrl = "http://localhost:8080/api/user/auth";
+import { authUrl } from "../ignoreUrl/url";
+const baseUrl = authUrl;
 
 const useAuth = create((set) => ({
   user: null,

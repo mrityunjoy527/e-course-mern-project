@@ -1,5 +1,6 @@
 import { create } from "zustand";
-const baseUrl = "http://localhost:8080/api/purchase";
+import { purchaseUrl } from "../ignoreUrl/url";
+const baseUrl = purchaseUrl;
 
 const usePurchase = create((set) => ({
   async createCheckoutSession(courseId) {

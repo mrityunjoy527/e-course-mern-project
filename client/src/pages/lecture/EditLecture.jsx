@@ -10,8 +10,7 @@ import useCourse from "../../utils/useCourse";
 import LoadingPage from "../../components/LoadingPage";
 import { FiAlertCircle } from "react-icons/fi";
 import Loader from "../../components/Loader";
-
-const URL = "http://localhost:8080/api/media";
+import { mediaUrl as URL } from "../../ignoreUrl/url";
 
 function EditLecture() {
 
