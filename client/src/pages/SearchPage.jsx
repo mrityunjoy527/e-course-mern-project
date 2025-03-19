@@ -167,11 +167,11 @@ function SearchPage() {
     if(isLoading) return <LoadingPage/>
 
     return (
-        <div className="mt-[60px] max-w-screen-xl mx-auto px-3 pt-10">
+        <div className="mt-[60px] h-full max-w-screen-xl mx-auto px-3 pt-10 text-black dark:text-gray-300">
             {query && filterCategories.length === 0 && <div className="flex flex-col items-start gap-1">
                 <h4 className="text-2xl font-bold">{data?.courses?.length} results for "{query}"</h4>
                 <p className="text-base">Showing results for
-                    <span className=" font-bold italic text-blue-800">
+                    <span className=" font-bold italic text-blue-800 dark:text-blue-500">
                         {` ${query}`}
                     </span>
                 </p>
@@ -189,17 +189,17 @@ function SearchPage() {
                     <div className="h-[1px] w-full bg-gray-200 my-5">
                     </div>
                     <p className="text-lg font-bold uppercase">Category</p>
-                    <div className="flex md:flex-col flex-row flex-wrap md:gap-1 gap-3 mt-2">
+                    <div className="flex md:flex-col flex-row flex-wrap md:gap-1 gap-3 mt-2 dark:text-gray-400">
                         {filters.map((filter) => (<div key={filter.id} className="flex items-center gap-1 md:gap-2">
                             <input type="checkbox" id={filter.id} checked={selectedCategories.includes(filter.id)}
-                                className="w-4 h-4 accent-black" onChange={(e) => handleFilter(e, filter.id)} />
+                                className="w-4 h-4 accent-indigo-500 bg-gray-300" onChange={(e) => handleFilter(e, filter.id)} />
                             <label htmlFor={filter.id} className="font-medium text-base">{filter.name}</label>
                         </div>))}
                     </div>
                 </div>
                 {isLoading ? <div className=""></div> : <div className="flex flex-col items-center flex-1 w-full">
                     {data?.courses?.length > 0 ? data?.courses.map((course) => (
-                        <Link key={course._id} to={`/course-detail/${course._id}`} className="hover:shadow-md cursor-pointer flex md:flex-row flex-col items-start md:items-center w-full justify-between border-b-[1px] border-b-gray-200 py-4 gap-4 rounded-md">
+                        <Link key={course._id} to={`/course-detail/${course._id}`} className="hover:shadow-md hover:bg-gray-200 hover:dark:bg-gray-800 cursor-pointer flex md:flex-row flex-col items-start md:items-center w-full justify-between border-b-[1px] border-b-gray-200 py-4 gap-4 rounded-md">
                             <div className="flex md:flex-row flex-col md:items-center items-start gap-4 w-full">
                                 <img className="aspect-video rounded-md h-[8rem] w-full md:w-auto object-cover"
                                     src={course?.courseThumbnail} alt=""
@@ -207,11 +207,10 @@ function SearchPage() {
                                 <div className="flex flex-col gap-2 flex-1 ">
                                     <h4 className="text-xl w-fit hover:underline font-bold line-clamp-1">{course?.courseTitle}</h4>
                                     <p className="text-sm line-clamp-2 ">{course?.subTitle}</p>
-                                    <p className="text-sm line-clamp-2 ">{course?.category}</p>
                                     <p>
                                         Instructor: <span className="font-bold">{course?.creator?.username}</span>
                                     </p>
-                                    <div className="py-1 px-3 font-semibold bg-black text-white w-fit text-xs rounded-md">
+                                    <div className="py-1 px-3 font-semibold bg-black dark:bg-indigo-800 text-white w-fit text-xs rounded-md">
                                         {course?.courseLevel}
                                     </div>
                                 </div>

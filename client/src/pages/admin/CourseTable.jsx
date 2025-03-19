@@ -33,8 +33,8 @@ function CourseTable() {
     }
 
     return (
-        <div className="flex flex-col w-full gap-4 overflow-y-auto overflow-x-hidden">
-            <Link className="text-sm w-fit font-semibold text-white bg-black hover:bg-gray-800 transition-all duration-150 py-2 px-4 cursor-pointer rounded-md" to='/admin/course/create'>
+        <div className="flex flex-col w-full gap-4 overflow-y-auto overflow-x-hidden dark:text-white text-black">
+            <Link className="text-sm w-fit font-semibold text-white bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 transition-all duration-150 py-2 px-4 cursor-pointer rounded-md" to='/admin/course/create'>
                 Create Course
             </Link>
             <table className="w-full">
@@ -53,7 +53,7 @@ function CourseTable() {
                                 <p className={`${course?.isPublished ? "bg-green-200" : "bg-yellow-200"} w-fit py-1 font-semibold md:px-3 px-2 text-sm text-green-800 rounded-md`}>{course?.isPublished ? "Published" : "Private"}</p>
                             </td>
                             <td className="px-1 py-3">
-                                <Link className="text-sm font-semibold hover:bg-gray-100 transition-all duration-150 py-1 md:px-3 px-2 cursor-pointer border rounded-md" to={`/admin/course/${course._id}`}>
+                                <Link className="text-sm font-semibold dark:bg-gray-900 bg-white hover:bg-gray-200 hover:dark:bg-gray-800 transition-all duration-150 py-1 md:px-3 px-2 cursor-pointer outline outline-1 dark:outline-gray-700 outline-gray-300 rounded-md" to={`/admin/course/${course._id}`}>
                                     Edit
                                 </Link>
                             </td>
@@ -61,7 +61,7 @@ function CourseTable() {
                     ))}
                 </tbody>
             </table>
-            {data?.courses && <p className="text-base text-gray-600 text-center mt-5">
+            {data?.courses && <p className="text-base text-gray-600 dark:text-gray-400 text-center mt-5">
                 {data.courses.length > 0 ? "A list of your recent courses." : 'No courses created'}
             </p>}
         </div>

@@ -7,6 +7,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Loader from "../../components/Loader";
+import { useDarkModeContext } from "../../utils/DarkModeContext";
 
 function Register() {
 
@@ -15,6 +16,8 @@ function Register() {
     const [showOutline, setShowOutline] = useState(false);
     const { registerUser } = useAuth();
     const navigate = useNavigate();
+    const { isDarkMode } = useDarkModeContext();
+
 
     const { mutateAsync: onRegister, isLoading, isSuccess, data, error } = useMutation({
         mutationFn: registerUser,
@@ -39,7 +42,7 @@ function Register() {
 
     return (
         <div
-            className="w-full p-4 rounded-lg border-2 border-gray-300 flex flex-col gap-5 bg-white">
+            className="w-full p-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 flex flex-col gap-5 bg-white dark:bg-gray-800 dark:text-white text-black">
             <div>
                 <span
                     className="text-base font-semibold" onClick={() => {
@@ -62,7 +65,7 @@ function Register() {
                     name="username"
                     id="username"
                     placeholder="Enter username..."
-                    className="py-2 px-3 text-base border rounded-md border-gray-300 ring-white" />
+                    className="py-2 px-3 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black" />
                 <label
                     htmlFor="email"
                     className="text-base font-semibold">Email</label>
@@ -72,12 +75,12 @@ function Register() {
                     name="email"
                     id="email"
                     placeholder="Enter email..."
-                    className="py-2 px-3 text-base border rounded-md border-gray-300 ring-white" />
+                    className="py-2 px-3 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black" />
                 <label
                     htmlFor="password"
                     className="text-base font-semibold">Password</label>
                 <div
-                    className={`flex items-center py-2 px-3 rounded-md outline ${!showOutline && "outline-1 outline-gray-300"} gap-1 ${showOutline && "outline-2 outline-black"}`}>
+                    className={`flex items-center py-2 px-3 rounded-md outline bg-white dark:bg-gray-800 ${!showOutline && "outline-1 outline-gray-300 dark:outline-gray-600"} gap-1 ${showOutline && "outline-2 outline-black dark:outline-gray-400"}`}>
                     <input
                         {...register("password", { required: true })}
                         type={!show ? "password" : "text"}
@@ -86,7 +89,7 @@ function Register() {
                         name="password"
                         id="password"
                         placeholder="Enter password..."
-                        className=" text-base flex-1 border-none outline-none" />
+                        className=" text-base flex-1 border-none outline-none bg-white dark:bg-gray-800 placeholder:dark:text-gray-400" />
                     {!show ?
                         <IoEyeOff
                             onClick={() => { setShow(true); }}
@@ -98,8 +101,8 @@ function Register() {
                 </div>
                 <button
                     disabled={isLoading}
-                    className="mt-4 py-2 px-4 bg-black text-white font-semibold sm:text-base text-sm  w-fit rounded-lg active:scale-95 disabled:bg-gray-600 disabled:cursor-not-allowed">
-                    {isLoading ? <Loader className="h-5 w-5" text="Please wait..." col="white" /> : "Register"}
+                    className="mt-4 py-2 px-4 bg-black dark:bg-gray-200 text-white dark:text-black font-semibold sm:text-base text-sm w-fit rounded-lg active:scale-95 disabled:bg-gray-500 disabled:dark:bg-gray-500  disabled:cursor-not-allowed">
+                    {isLoading ? <Loader className="h-5 w-5" text="Please wait..." col={isDarkMode ? "black" : "white"} /> : "Register"}
                 </button>
             </form>
         </div >

@@ -11,7 +11,7 @@ import LoadingPage from "../../components/LoadingPage";
 import { FiAlertCircle } from "react-icons/fi";
 import Loader from "../../components/Loader";
 
-const URL = "https://skillsprint-backend-863b.onrender.com/api/media";
+const URL = "http://localhost:8080/api/media";
 
 function EditLecture() {
 
@@ -128,7 +128,7 @@ function EditLecture() {
   }
 
   if (showErrorTab) return <div className='flex h-[calc(100vh-60px-10rem)] w-full items-center justify-center'>
-    <div className="flex flex-col gap-2 items-center md:relative justify-center">
+    <div className="flex flex-col gap-2 items-center md:relative justify-center text-black dark:text-white">
       <FiAlertCircle className="text-red-600 w-14 h-14" />
       <h1 className="text-2xl font-bold">Lecture not found</h1>
       <p className="text-base">Sorry we couldn't find the lecture you are looking for</p>
@@ -140,22 +140,22 @@ function EditLecture() {
   }
 
   return (
-    <div className="flex flex-col max-w-[50rem] gap-6 overflow-y-auto">
+    <div className="flex flex-col max-w-[50rem] gap-6 overflow-y-auto text-black dark:text-white">
       <div className='flex items-center gap-4'>
         <Link
           to={`/admin/course/${courseId}/lecture`}
-          className='font-semibold cursor-pointer rounded-full border p-2'>
+          className='font-semibold cursor-pointer rounded-full p-2 border dark:border-gray-700 border-gray-300'>
           <FaArrowLeft className="w-5 h-5" />
         </Link>
         <h1 className="text-2xl font-bold">
           Update your lecture
         </h1>
       </div>
-      <div className="border border-gray-100 shadow-lg rounded-xl md:py-8 md:px-6 px-4 py-5 flex flex-col gap-8">
+      <div className="border border-gray-100 dark:border-gray-700 shadow-lg rounded-xl md:py-8 md:px-6 px-4 py-5 flex flex-col gap-8">
         <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex flex-col">
             <h5 className="md:text-xl text-lg font-semibold">Edit Lecture</h5>
-            <p className="md:text-lg text-base text-gray-500">Make changes and click save when you're done.</p>
+            <p className="md:text-lg text-base text-gray-500 dark:text-gray-400">Make changes and click save when you're done.</p>
           </div>
           <button disabled={removeLoading || updateLoading || mediaUploading} className="md:text-base text-sm rounded-lg font-semibold text-white bg-red-600 hover:bg-red-700 transition-all text-nowrap duration-150 w-full sm:w-fit py-2 px-4 cursor-pointer disabled:bg-red-400 disabled:cursor-not-allowed"
             onClick={async () => {
@@ -165,7 +165,7 @@ function EditLecture() {
           </button>
         </div>
         <form
-          className="md:text-lg text-base flex flex-col gap-5"
+          className="md:text-lg text-base flex flex-col gap-5 w-full"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col">
@@ -177,7 +177,7 @@ function EditLecture() {
               type="text"
               id="title"
               placeholder="Ex. Introduction to web development"
-              className="md:py-2 py-1 px-3 border rounded-md border-gray-300"
+              className="md:py-2 py-1 px-3 shadow-sm w-full rounded-md focus:outline-2 outline-1 outline outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black"
             />
           </div>
           <div className="flex flex-col">
@@ -189,7 +189,7 @@ function EditLecture() {
               id="videoFile"
               accept="video/*"
               name="photo"
-              className="w-full md:w-fit border border-gray-300 rounded-md px-3 md:py-2 py-1 file:bg-white file:border-none file:font-semibold file:underline file:cursor-pointer text-gray-500"
+              className="w-full md:w-fit rounded-md px-3 md:py-2 py-1 outline outline-1 outline-gray-300 dark:outline-gray-600 file:bg-white file:dark:bg-gray-800 file:border-none file:font-semibold file:underline file:cursor-pointer file:dark:text-white dark:text-gray-400 text-gray-500 "
               onChange={fileHandler}
             />
             {mediaUploading && <>
@@ -204,7 +204,7 @@ function EditLecture() {
             <Switch onChange={setIsOn} isOn={isOn} />
             <p className="font-semibold text-base">Is this video FREE ?</p>
           </div>
-          <button disabled={mediaUploading || removeLoading || updateLoading} className="sm:w-fit w-full md:text-base text-sm font-semibold text-white bg-black hover:bg-gray-800 transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed">
+          <button disabled={mediaUploading || removeLoading || updateLoading} className="md:text-base text-sm font-semibold text-white sm:w-fit text-center bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 w-full transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed disabled:dark:bg-gray-500">
             {updateLoading ? <Loader className="h-5 w-5" text="Please wait..." col="white" /> : "Upload Lecture"}
           </button>
         </form>

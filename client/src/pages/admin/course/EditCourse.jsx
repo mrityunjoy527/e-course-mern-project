@@ -14,6 +14,15 @@ import Loader from '../../../components/Loader';
 
 function EditCourse() {
 
+    const modules = {
+        toolbar: [
+            [{ header: [1, false] }],
+            ["bold", "italic", "underline"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link", "image"],
+        ],
+    };
+
     const queryClient = useQueryClient();
     const { register, handleSubmit, setValue, watch } = useForm('');
     const [thumbnail, setThumbnail] = useState("");
@@ -160,15 +169,15 @@ function EditCourse() {
     }
 
     if (showErrorTab) return <div className='flex h-[calc(100vh-60px-10rem)] w-full items-center justify-center'>
-        <div className="flex flex-col gap-2 items-center md:relative justify-center">
+        <div className="flex flex-col gap-2 items-center md:relative justify-center text-black dark:text-white">
             <FiAlertCircle className="text-red-600 w-14 h-14" />
-            <h1 className="text-2xl font-bold">Course not found</h1>
+            <h1 className="text-2xl font-bold ">Course not found</h1>
             <p className="text-base">Sorry we couldn't find the course you are looking for</p>
         </div>
     </div>;
 
     return (
-        <div className="flex flex-col w-full gap-6">
+        <div className="flex flex-col w-full gap-6 text-black dark:text-white">
             <div className='flex items-center justify-end md:justify-between gap-1'>
                 <h1
                     className="hidden md:block font-bold text-2xl">
@@ -176,24 +185,24 @@ function EditCourse() {
                 </h1>
                 <Link
                     to={`/admin/course/${courseId}/lecture`}
-                    className='text-lg text-nowrap font-semibold cursor-pointer text-blue-600'>
+                    className='text-lg text-nowrap font-semibold cursor-pointer text-blue-600 dark:text-blue-500'>
                     Go to lectures
                 </Link>
             </div>
-            <div className="border border-gray-100 shadow-lg rounded-xl md:py-8 md:px-6 px-4 py-5 flex flex-col gap-8">
+            <div className="outline outline-1 outline-gray-100 dark:outline-gray-700 shadow-lg rounded-xl md:py-8 md:px-6 px-4 py-5 flex flex-col gap-8">
                 <div className="flex flex-col-reverse md:flex-row md:items-center gap-5 justify-between">
                     <div className="flex flex-col">
                         <h5 className="md:text-xl text-lg font-semibold">Basic Information</h5>
-                        <p className="md:text-lg text-base text-gray-500">
+                        <p className="md:text-lg text-base text-gray-500 dark:text-gray-400">
                             Make changes to your courses here. Click save when you're done.
                         </p>
                     </div>
                     <div className="flex items-center md:justify-center sm:justify-between justify-center gap-3">
-                        <button disabled={course?.lectures?.length === 0 || mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold hover:bg-gray-100 transition-all w-full duration-150 py-2 px-4 cursor-pointer border disabled:bg-gray-300 text-nowrap disabled:cursor-not-allowed" onClick={() =>
+                        <button disabled={course?.lectures?.length === 0 || mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold disabled:bg-gray-300 text-nowrap disabled:cursor-not-allowed hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none " onClick={() =>
                             handleTogglePublish(course.isPublished ? "false" : "true")}>
                             {publishLoading ? <Loader className="h-5 w-5" text="Please wait..." col="black" /> : course?.isPublished ? "Unpublish" : "Publish"}
                         </button>
-                        <button disabled={mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold text-white bg-black hover:bg-gray-800 text-nowrap w-full transition-all duration-150 py-2 px-4 cursor-pointer disabled:bg-gray-600 disabled:cursor-not-allowed" onClick={handleRemove}>
+                        <button disabled={mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm font-semibold text-nowrap text-white sm:w-fit text-center bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 w-full transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed disabled:dark:bg-gray-500 " onClick={handleRemove}>
                             {removeLoading ? <Loader className="h-5 w-5" text="Please wait..." col="white" /> : "Remove Course"}
                         </button>
                     </div>
@@ -208,7 +217,7 @@ function EditCourse() {
                             type="text"
                             id="title"
                             placeholder="Ex. Fullstack development"
-                            className="md:py-2 px-3 py-1 border rounded-md border-gray-300"
+                            className="md:py-2 px-3 py-1 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black"
                         />
                     </div>
                     <div className="flex flex-col">
@@ -220,16 +229,17 @@ function EditCourse() {
                             type="text"
                             id="subTitle"
                             placeholder="Ex. Fullstack development course from zero to hero."
-                            className="md:py-2 px-3 py-1 border rounded-md border-gray-300"
+                            className="md:py-2 px-3 py-1 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black "
                         />
                     </div>
                     <div className='flex flex-col mb-3 overflow-hidden'>
                         <label htmlFor="description" className='font-semibold'>Description</label>
                         <ReactQuill
-                            theme="snow"
                             value={description}
+                            theme='snow'
                             onChange={(content) => setValue("description", content)}
-                            className='border-b border-gray-300'
+                            className='text-base focus:outline-2 rounded-md bg-white dark:bg-gray-800 placeholder:dark:text-gray-400'
+                            placeholder='Description...'
                         />
                     </div>
                     <div className='flex sm:flex-row flex-col items-center flex-wrap gap-4'>
@@ -237,7 +247,7 @@ function EditCourse() {
                             <label htmlFor="category" className="font-semibold">Category</label>
                             <select
                                 {...register("category")}
-                                id="category" className="border border-gray-200 shadow-sm md:py-2 px-3 py-1 rounded-md">
+                                id="category" className="shadow-sm md:py-2 px-3 py-1 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black">
                                 <option value="default">Select a category</option>
                                 <option value="software-development">Software Development</option>
                                 <option value="web-development">Web Development</option>
@@ -274,7 +284,7 @@ function EditCourse() {
                             <label htmlFor="courseLevel" className="font-semibold">Course Level</label>
                             <select
                                 {...register("courseLevel")}
-                                id="courseLevel" className="border border-gray-200 shadow-sm md:py-2 px-3 py-1 rounded-md">
+                                id="courseLevel" className=" shadow-sm md:py-2 px-3 py-1 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black">
                                 <option value="default">Select a course level</option>
                                 <option value="Beginner">Beginner</option>
                                 <option value="Medium">Medium</option>
@@ -285,17 +295,17 @@ function EditCourse() {
                             <label htmlFor="price" className='font-semibold'>Price in (INR)</label>
                             <input
                                 {...register("coursePrice")}
-                                type="number" id='price' className="md:py-2 px-3 py-1 border rounded-md border-gray-300 " placeholder='399' />
+                                type="number" id='price' className="md:py-2 px-3 py-1 text-base border-none focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black " placeholder='399' />
                         </div>
                     </div>
                     <div className="flex flex-col sm:w-fit w-full">
                         <p className="font-semibold cursor-default">Course Thumbnail</p>
                         {thumbnail && <img src={thumbnail} alt="" className='mb-2 object-cover w-[18rem] h-[9rem] rounded-lg' />}
-                        <input type="file" id="photo" accept="image/*" name="photo" className="sm:w-[18rem] border border-gray-300 rounded-md md:py-2 px-3 py-1 file:bg-white file:border-none file:font-semibold file:underline file:cursor-pointer text-gray-500 w-full" onChange={fileHandler} />
+                        <input type="file" id="photo" accept="image/*" name="photo" className="sm:w-[18rem] rounded-md md:py-2 px-3 py-1 w-full outline outline-1 outline-gray-300 dark:outline-gray-600 file:bg-white file:dark:bg-gray-800 file:border-none file:font-semibold file:underline file:cursor-pointer file:dark:text-white dark:text-gray-400 text-gray-500 " onChange={fileHandler} />
                     </div>
                     <div className="flex items-center gap-4">
-                        <Link to="/admin/course" className="md:text-base text-sm font-semibold hover:bg-gray-100 transition-all duration-150 py-2 px-4 cursor-pointer border rounded-md">Cancel</Link>
-                        <button disabled={mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm font-semibold text-white bg-black hover:bg-gray-800 transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed">
+                        <Link to="/admin/course" className="md:text-base text-sm font-semibold rounded-md   hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none ">Cancel</Link>
+                        <button disabled={mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm font-semibold text-white sm:w-fit text-center bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 w-full transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed disabled:dark:bg-gray-500 ">
                             {mutationLoading ? <Loader className="h-5 w-5" text="Please wait..." col="white" /> : "Save"}
                         </button>
                     </div>

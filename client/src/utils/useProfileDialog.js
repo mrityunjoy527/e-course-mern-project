@@ -4,7 +4,6 @@ const useProfileDialog = create((set) => ({
   openProfileDialog: false,
   openThemeDialog: false,
   resetDialog() {
-    // console.log("Closed");
     set({ openProfileDialog: false, openThemeDialog: false });
   },
   toggleProfileDialog() {
@@ -18,7 +17,6 @@ const useProfileDialog = create((set) => ({
     });
   },
   toggleThemeDialog() {
-    // console.log("first");
     set((state) => {
       if (!state.openThemeDialog && state.openProfileDialog)
         return {

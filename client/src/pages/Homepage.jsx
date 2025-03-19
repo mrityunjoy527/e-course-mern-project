@@ -33,7 +33,7 @@ function Homepage() {
         <div className="flex flex-col w-full z-10">
             <Hero />
             <section className="flex max-w-screen-xl w-full mx-auto flex-col relative mt-5 px-3">
-                <h1 className="text-center font-bold text-2xl">Our Courses</h1>
+                <h1 className="text-center dark:text-white text-black font-bold text-3xl">Our Courses</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-5">
                     {data?.courses?.map((course) => (<CourseItem key={course._id} course={course} />))}
                 </div>

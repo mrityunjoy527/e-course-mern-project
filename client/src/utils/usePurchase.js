@@ -1,5 +1,5 @@
 import { create } from "zustand";
-const baseUrl = "https://skillsprint-backend-863b.onrender.com/api/purchase";
+const baseUrl = "http://localhost:8080/api/purchase";
 
 const usePurchase = create((set) => ({
   async createCheckoutSession(courseId) {

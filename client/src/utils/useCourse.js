@@ -1,5 +1,5 @@
 import { create } from "zustand";
-const baseUrl = "https://skillsprint-backend-863b.onrender.com/api/course";
+const baseUrl = "http://localhost:8080/api/course";
 
 const useCourse = create((set) => ({
   courses: null,

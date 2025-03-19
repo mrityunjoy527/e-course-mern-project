@@ -64,7 +64,7 @@ function CourseDetails() {
     return <LoadingPage />;
   }
 
-  if (showErrorTab) return <div className='flex mt-[60px] h-[calc(100vh-60px)] w-full items-center justify-center'>
+  if (showErrorTab) return <div className='flex h-[calc(100vh-60px)] w-full items-center justify-center text-black dark:text-white'>
     <div className="flex flex-col gap-2 items-center md:relative justify-center">
       <FiAlertCircle className="text-red-600 w-14 h-14" />
       <h1 className="text-2xl font-bold">Course not found</h1>
@@ -73,8 +73,8 @@ function CourseDetails() {
   </div>;
 
   return (
-    <div className="mt-[60px] ">
-      <div className="bg-zinc-800">
+    <div className="mt-[60px] text-black dark:text-white ">
+      <div className="bg-zinc-800 dark:bg-gray-800">
         <div className="max-w-screen-xl mx-auto flex flex-col gap-2 text-white py-10 px-3">
           <h1 className="md:text-3xl text-2xl font-extrabold">{course?.courseTitle}</h1>
           <h3 className="font-semibold md:text-xl text-lg">{course?.subTitle}</h3>
@@ -90,10 +90,10 @@ function CourseDetails() {
         <div className="flex flex-col md:flex-1 gap-3">
           <h1 className="md:text-2xl text-xl font-bold">Description</h1>
           <p className="md:text-base text-sm" dangerouslySetInnerHTML={{ __html: course?.description }} />
-          <div className="shadow-xl text-lg flex flex-col gap-5 md:py-5 md:px-7 px-5 py-3 rounded-xl border border-gray-200">
+          <div className="shadow-xl text-lg flex flex-col gap-5 md:py-5 md:px-7 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-700">
             <div>
               <h4 className="font-bold md:text-2xl text-xl">Course Content</h4>
-              <p className="text-gray-500 text-base">{course?.lectures?.length} lectures</p>
+              <p className="text-gray-500 dark:text-gray-400 text-base">{course?.lectures?.length} lectures</p>
             </div>
             <div className="flex flex-col gap-3">
               {course?.lectures?.map((lecture) => (<p key={lecture._id} className="flex items-center gap-2 line-clamp-1 md:text-lg text-base">
@@ -106,8 +106,7 @@ function CourseDetails() {
           </div>
         </div>
         <div className="md:flex-1 flex md:justify-end justify-center w-full">
-          <div className="shadow-xl text-xl px-3 pt-3 pb-4 rounded-xl border border-gray-200 w-full">
-            {/* <p>React player video ayga</p> */}
+          <div className="shadow-xl text-xl px-3 pt-3 pb-4 rounded-xl border border-gray-200 dark:border-gray-700 w-full">
             <div className="aspect-video rounded-md overflow-hidden">
               <ReactPlayer
                 width={"100%"}
@@ -117,9 +116,9 @@ function CourseDetails() {
               />
             </div>
             <p className="text-xl mt-2 font-medium">{course?.lectures?.[0]?.lectureTitle}</p>
-            <div className="h-[1px] mt-2 w-full border border-gray-200"></div>
+            <div className="h-[1px] mt-2 w-full border border-gray-200 dark:border-gray-700"></div>
             <p className="mt-2 text-xl font-semibold">₹{course?.coursePrice}</p>
-            <button onClick={handleButton} disabled={isLoading} className="sm:text-lg text-base mt-8 rounded-lg font-semibold text-white bg-black hover:bg-gray-800 disabled:bg-gray-600 transition-all duration-150 py-2 px-4 cursor-pointer w-full disabled:cursor-not-allowed">
+            <button onClick={handleButton} disabled={isLoading} className="sm:text-lg text-base mt-8 rounded-lg font-semibold text-white bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 disabled:bg-gray-600 disabled:dark:bg-gray-400 transition-all duration-150 py-2 px-4 cursor-pointer w-full disabled:cursor-not-allowed border dark:border-gray-700 border-gray-200">
               {queryData?.purchased ? "Continue Course" :
                 isLoading ?
                   <Loader className="h-5 w-5" text="Please wait..." col="white" /> :

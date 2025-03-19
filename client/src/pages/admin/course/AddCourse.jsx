@@ -32,7 +32,7 @@ function AddCourse() {
     }, [error, isSuccess, isLoading]);
 
     return (
-        <div className="flex flex-col gap-4 w-full ">
+        <div className="flex flex-col gap-4 w-full text-black dark:text-white">
             <div className="flex flex-col items-center sm:items-start">
                 <h1 className="text-2xl font-bold sm:text-start text-center">Create courses that educate, motivate, and transform lives.</h1>
                 <p className="text-base sm:text-start text-center">Your journey starts here. Build courses that matter.</p>
@@ -42,13 +42,13 @@ function AddCourse() {
                     <label htmlFor="title" className="font-semibold">Title</label>
                     <input
                         {...register("courseTitle", { required: true })}
-                        type="text" id="title" placeholder="Your course title..." className="border border-gray-200 shadow-sm md:py-2 py-1 px-3 rounded-md max-w-[45rem] w-full" />
+                        type="text" id="title" placeholder="Your course title..." className="shadow-sm md:py-2 py-1 px-3 rounded-md max-w-[45rem] w-full text-base focus:outline-2 outline-1 outline outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black" />
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="category" className="font-semibold">Category</label>
                     <select
                         {...register("category", { required: true })}
-                        id="category" className="border border-gray-200 shadow-sm p-2 rounded-md sm:max-w-fit w-full checked:bg-red-400">
+                        id="category" className="border border-gray-200 shadow-sm p-2 rounded-md sm:max-w-fit w-full checked:bg-red-400 text-base border-none focus:outline-2 outline-1 outline outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 focus:dark:outline-gray-400 focus:outline-black">
                         <option value="default">Choose a category</option>
                         <option value="software-development">Software Development</option>
                         <option value="web-development">Web Development</option>
@@ -82,10 +82,10 @@ function AddCourse() {
                     </select>
                 </div>
                 <div className="flex items-center sm:justify-start justify-center gap-4">
-                    <Link to="/admin/course" className="md:text-base text-sm font-semibold hover:bg-gray-100 transition-all text-center duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer border rounded-md">
+                    <Link to="/admin/course" className="md:text-base text-sm font-semibold hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none rounded-md">
                         Back
                     </Link>
-                    <button disabled={isLoading} type="submit" className="md:text-base text-sm font-semibold text-white sm:w-fit text-center bg-black hover:bg-gray-800 w-full transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed">
+                    <button disabled={isLoading} type="submit" className="md:text-base text-sm font-semibold text-white sm:w-fit text-center bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 w-full transition-all duration-150 py-2 px-4 cursor-pointer rounded-md disabled:bg-gray-600 disabled:cursor-not-allowed disabled:dark:bg-gray-500 ">
                         {isLoading ? <Loader className="h-5 w-5" text="Please wait..." col="white" /> : "Create"}
                     </button>
                 </div>
