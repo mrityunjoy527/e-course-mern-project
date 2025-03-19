@@ -198,7 +198,7 @@ function EditCourse() {
                         </p>
                     </div>
                     <div className="flex items-center md:justify-center sm:justify-between justify-center gap-3">
-                        <button disabled={course?.lectures?.length === 0 || mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold disabled:bg-gray-300 text-nowrap disabled:cursor-not-allowed hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none " onClick={() =>
+                        <button disabled={course?.lectures?.length === 0 || mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold disabled:bg-gray-500 disabled:dark:bg-gray-500 text-nowrap disabled:cursor-not-allowed hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none " onClick={() =>
                             handleTogglePublish(course.isPublished ? "false" : "true")}>
                             {publishLoading ? <Loader className="h-5 w-5" text="Please wait..." col="black" /> : course?.isPublished ? "Unpublish" : "Publish"}
                         </button>
@@ -238,7 +238,7 @@ function EditCourse() {
                             value={description}
                             theme='snow'
                             onChange={(content) => setValue("description", content)}
-                            className='text-base focus:outline-2 rounded-md bg-white dark:bg-gray-800 placeholder:dark:text-gray-400'
+                            className='text-base focus:outline-2 rounded-md bg-white dark:bg-gray-800 placeholder:dark:text-gray-400 text-black dark:text-white'
                             placeholder='Description...'
                         />
                     </div>

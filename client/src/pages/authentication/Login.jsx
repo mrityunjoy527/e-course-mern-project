@@ -91,7 +91,7 @@ function Login() {
                 </div>
                 <button
                     disabled={isLoading}
-                    className="mt-4 py-2 px-4 bg-black dark:bg-gray-200 text-white dark:text-black font-semibold sm:text-base text-sm w-fit rounded-lg active:scale-95 disabled:bg-gray-500 disabled:dark:bg-gray-500  disabled:cursor-not-allowed">
+                    className="mt-4 py-2 px-4 bg-black dark:bg-gray-200 text-white dark:text-black font-semibold sm:text-base text-sm w-fit rounded-lg active:scale-95 disabled:bg-gray-500 disabled:dark:bg-gray-500 disabled:cursor-not-allowed">
                     {isLoading ? <Loader className="h-5 w-5" text="Please wait..." col={isDarkMode? "black" :"white"} /> : "Login"}
                 </button>
             </form>
