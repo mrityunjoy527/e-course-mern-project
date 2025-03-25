@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import compressImage from '../utils/useCompress';
 import Loader from "../components/Loader";
 import { useDarkModeContext } from "../utils/DarkModeContext";
+import { Link } from "react-router-dom";
 
 function Profile() {
 
@@ -43,6 +44,8 @@ function Profile() {
         }
         await onUpdate(formData);
     }
+
+    console.log(user);
 
     useEffect(() => {
         if (isSuccess) {
@@ -88,14 +91,24 @@ function Profile() {
                     </form>
                 </div>
             </Modal>}
-            <h1 className="font-bold md:text-2xl text-xl uppercase mt-5">Profile</h1>
-            <div className="flex md:flex-row flex-col items-center gap-8 w-full mt-10">
-                <img className="h-[10rem] w-[10rem] object-cover rounded-full" src={user?.photoUrl || "./avatar.svg"} alt="" />
+            <div className="flex flex-row md:items-start items-center md:justify-between justify-center w-full mt-5">
+                <h1 className="font-bold md:text-2xl text-xl uppercase">Profile</h1>
+                {user?.role === "student" && <Link to='/profile/start-teaching' className="hidden md:block py-2 px-4 dark:bg-gray-200 text-black font-semibold text-sm w-fit rounded-lg md:text-base text-nowrap hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center duration-150 sm:w-fit shadow-md cursor-pointer outline outline-1 outline-gray-300 dark:outline-none bg-white">
+                    Start Teaching
+                </Link>}
+            </div>
+            <div className="flex md:flex-row flex-col items-center gap-8 w-full mt-10 flex-1">
+                <img className="h-[10rem] w-[10rem] object-cover rounded-full" src={user?.photoUrl || "/avatar.svg"} alt="" />
                 <div className="flex flex-col md:items-start items-center justify-between flex-1 h-full gap-3 w-full">
                     <p className="text-lg text-gray-700 dark:text-gray-400 truncate w-full md:text-start text-center"><span className="font-semibold mr-2 text-black dark:text-white">Name:</span>{user?.username}</p>
                     <p className="text-lg text-gray-700 dark:text-gray-400 truncate w-full md:text-start text-center"><span className="font-semibold mr-2 text-black dark:text-white">Email:</span>{user?.email}</p>
                     <p className="text-lg text-gray-700 dark:text-gray-400 truncate w-full md:text-start text-center uppercase"><span className="font-semibold mr-2 text-black dark:text-white normal-case">Role:</span>{user?.role}</p>
-                    <button onClick={() => { setShowDialog(true); setScroll(true); }} className="text-sm font-semibold text-white bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 transition-all duration-150 py-2 px-4 cursor-pointer rounded-lg border dark:border-gray-700 border-gray-200">Edit Profile</button>
+                    <div className="flex items-center gap-3 sm:w-fit w-full">
+                        <button onClick={() => { setShowDialog(true); setScroll(true); }} className="md:text-base text-sm font-semibold text-white bg-black dark:bg-gray-700 hover:bg-gray-800 hover:dark:bg-gray-800 transition-all duration-150 py-2 px-4 w-full sm:w-fit cursor-pointer rounded-lg border dark:border-gray-700 border-gray-200">Edit Profile</button>
+                        {user?.role === "student" && <Link to='/profile/start-teaching' className="py-2 md:hidden block px-4 bg-white dark:bg-gray-200 text-black font-semibold text-sm w-full sm:w-fit rounded-lg md:text-base hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center duration-150 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none">
+                            Start Teaching
+                        </Link>}
+                    </div>
                 </div>
             </div>
             <h1 className="font-semibold text-xl mt-10">Courses you're enrolled in </h1>

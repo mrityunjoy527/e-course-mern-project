@@ -3,6 +3,7 @@ import {
   getUserProfile,
   loginUser,
   logoutUser,
+  makeInstructor,
   registerUser,
   updateProfile,
 } from "../controllers/user.controller.js";
@@ -18,6 +19,8 @@ userRouter.post("/login", loginUser);
 userRouter.get("/logout", logoutUser);
 
 userRouter.get("/profile", isAuthenticated, getUserProfile);
+
+userRouter.post("/profile", isAuthenticated, makeInstructor);
 
 userRouter.put(
   "/profile/update",

@@ -120,15 +120,15 @@ function EditCourse() {
 
     useEffect(() => {
         if (mutationSuccess) {
-            if (!mutationData?.course) toast.error(mutationData?.message, { id: 8 });
+            if (!mutationData?.course) toast.error(mutationData?.message, { id: 7 });
             else {
                 queryClient.invalidateQueries(["courses"]);
                 navigate("/admin/course", { replace: true });
-                toast.success(mutationData?.message, { id: 8 });
+                toast.success(mutationData?.message, { id: 7 });
             }
         }
         if (mutationError) {
-            toast.error("Something went wrong!", { id: 8 });
+            toast.error("Something went wrong!", { id: 7 });
         }
     }, [mutationLoading, mutationSuccess, mutationError]);
 
@@ -143,7 +143,9 @@ function EditCourse() {
     }, [course]);
 
     async function handleTogglePublish(action) {
-        await onTogglePublish({ courseId, query: action });
+        if (course?.lectures?.length === 0) {
+            toast("Make sure to add lectures", { id: 7 });
+        } else await onTogglePublish({ courseId, query: action });
     }
 
     useEffect(() => {
@@ -198,7 +200,7 @@ function EditCourse() {
                         </p>
                     </div>
                     <div className="flex items-center md:justify-center sm:justify-between justify-center gap-3">
-                        <button disabled={course?.lectures?.length === 0 || mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold disabled:bg-gray-500 disabled:dark:bg-gray-500 text-nowrap disabled:cursor-not-allowed hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none " onClick={() =>
+                        <button disabled={mutationLoading || publishLoading || removeLoading} className="md:text-base text-sm rounded-lg font-semibold disabled:bg-gray-500 disabled:dark:bg-gray-500 text-nowrap disabled:cursor-not-allowed hover:bg-gray-200 hover:dark:bg-gray-400 transition-all text-center text-black bg-white dark:bg-gray-200 duration-150 sm:w-fit w-full py-2 px-4 cursor-pointer outline outline-1 outline-gray-300 dark:outline-none " onClick={() =>
                             handleTogglePublish(course.isPublished ? "false" : "true")}>
                             {publishLoading ? <Loader className="h-5 w-5" text="Please wait..." col="black" /> : course?.isPublished ? "Unpublish" : "Publish"}
                         </button>

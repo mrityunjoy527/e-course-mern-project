@@ -138,13 +138,11 @@ async function getCourseDetailsWithPurchaseStatus(req, res) {
     if (!course)
       return res.status(404).json({ message: "Course not found", ok: false });
     const purchased = await CourseTransaction.findOne({ courseId, userId });
-    return res
-      .status(200)
-      .json({
-        course,
-        purchased: purchased && purchased.status === "completed" ? true : false,
-        ok: true,
-      });
+    return res.status(200).json({
+      course,
+      purchased: purchased && purchased.status === "completed" ? true : false,
+      ok: true,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -154,8 +152,11 @@ async function getCourseDetailsWithPurchaseStatus(req, res) {
 
 async function getAllPurchasedCourses(req, res) {
   try {
+    const userId = req.id;
+    const courses = await Course.find({ creator: userId }, { _id: 1 });
     const purchase = await CourseTransaction.find({
       status: "completed",
+      courseId: { $in: courses },
     }).populate({ path: "courseId" });
     if (!purchase) {
       return res

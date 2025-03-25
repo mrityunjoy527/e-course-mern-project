@@ -24,6 +24,18 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "instructor"],
       default: "student",
     },
+    questionOne: {
+      type: String,
+    },
+    questionTwo: {
+      type: String,
+    },
+    courseCategory: {
+      type: String,
+    },
+    agreeToTerms: {
+      type: Boolean,
+    },
     enrolledCourses: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -46,11 +46,11 @@ function Stats() {
             <div className="grid gap-6 grid-row-3 sm:grid-cols-2 w-full">
                 <div className="flex flex-col gap-3 md:py-6 py-4 md:px-6 px-4 shadow-lg rounded-lg outline outline-[1px] outline-gray-200 dark:outline-gray-700">
                     <h1 className="md:text-xl text-lg font-semibold">Total Sales</h1>
-                    <p className="md:text-3xl text-2xl font-bold text-blue-600 dark:text-blue-500">{data?.purchase?.length}</p>
+                    <p className="md:text-3xl text-2xl font-bold text-blue-600 dark:text-blue-500">{data?.purchase?.length ?? 0}</p>
                 </div>
                 <div className="flex flex-col gap-3 md:py-6 py-4 md:px-6 px-4 shadow-lg rounded-lg outline outline-[1px] outline-gray-200 dark:outline-gray-700">
                     <h1 className="md:text-xl text-lg font-semibold">Total Revenue</h1>
-                    <p className="md:text-3xl text-2xl font-bold text-blue-600 dark:text-blue-500">₹{totalRevenue}</p>
+                    <p className="md:text-3xl text-2xl font-bold text-blue-600 dark:text-blue-500">₹{totalRevenue ?? 0}</p>
                 </div>
                 <div className="flex flex-col gap-3 sm:col-span-2 md:py-6 py-4 md:px-6 px-4 shadow-lg rounded-lg outline outline-[1px] outline-gray-200 dark:outline-gray-700">
                     <h1 className="md:text-xl text-lg font-semibold">Total Sales</h1>
@@ -65,7 +65,7 @@ function Stats() {
                                 interval={0} // Display all labels
                             />
                             <YAxis stroke={isDarkMode ? "#fff" : "#6b7280"} />
-                            <Tooltip contentStyle={{ backgroundColor: isDarkMode? "#1F2937": '#f0f0f0f0', borderRadius: '5px', borderColor: isDarkMode? "#6b7280": "#D1D5DB" }} formatter={(value, name) => [`₹${value}`, name]} />
+                            <Tooltip contentStyle={{ backgroundColor: isDarkMode ? "#1F2937" : '#f0f0f0f0', borderRadius: '5px', borderColor: isDarkMode ? "#6b7280" : "#D1D5DB" }} formatter={(value, name) => [`₹${value}`, name]} />
                             <Line
                                 type="monotone"
                                 dataKey="price"

@@ -21,6 +21,12 @@ export const AdminRoute = ({ children }) => {
     return children;
 }
 
+export const InstructorRoute = ({ children }) => {
+    const { user } = useAuth();
+    if (user?.role === 'instructor') return <Navigate to="/profile" replace={true} />;
+    return children;
+}
+
 export const CoursePurchasedRoute = ({ children }) => {
     const { courseId } = useParams();
     const { getCourseDetailsWithPurchaseStatus } = usePurchase();

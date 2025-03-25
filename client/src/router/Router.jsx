@@ -14,7 +14,8 @@ import CourseDetails from "../pages/admin/course/CourseDetails";
 import CourseProgress from "../pages/admin/course/CourseProgress";
 import SearchPage from "../pages/SearchPage";
 import MyLearning from "../pages/admin/course/MyLearning";
-import { AdminRoute, AuthenticatedRoute, CoursePurchasedRoute, LoggedInRoute } from "./Protect";
+import { AdminRoute, AuthenticatedRoute, CoursePurchasedRoute, InstructorRoute, LoggedInRoute } from "./Protect";
+import TurnInstructor from "../pages/TurnInstructor";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
                 path: "/profile",
                 element: <AuthenticatedRoute>
                     <Profile />
+                </AuthenticatedRoute>
+            },
+            {
+                path: "/profile/start-teaching",
+                element: <AuthenticatedRoute>
+                    <InstructorRoute>
+                        <TurnInstructor />
+                    </InstructorRoute>
                 </AuthenticatedRoute>
             },
             {

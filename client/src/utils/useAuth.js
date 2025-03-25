@@ -28,7 +28,6 @@ const useAuth = create((set) => ({
           user: data.user,
           isAuthenticated: false,
         }));
-      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
@@ -84,6 +83,23 @@ const useAuth = create((set) => ({
       const data = await res.json();
       if (data?.isLoggedOut)
         set(() => ({ user: null, isAuthenticated: false }));
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
+  async makeInstructor(info) {
+    try {
+      const options = {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(info),
+      };
+      const res = await fetch(`${baseUrl}/profile`, options);
+      const data = await res.json();
       return data;
     } catch (error) {
       console.log("error", error);

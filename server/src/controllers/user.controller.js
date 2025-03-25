@@ -29,12 +29,11 @@ const loginUser = async (req, res) => {
     if (!email || !password) {
       return res.status(500).json({ message: "All fields are required" });
     }
-    const user = await User.findOne({ email })
-      .populate({
-        path: "enrolledCourses",
-        select: "courseThumbnail coursePrice courseLevel courseTitle",
-        populate: { path: "creator", select: "username photoUrl" },
-      });
+    const user = await User.findOne({ email }).populate({
+      path: "enrolledCourses",
+      select: "courseThumbnail coursePrice courseLevel courseTitle",
+      populate: { path: "creator", select: "username photoUrl" },
+    });
     if (!user) {
       return res.status(500).json({ message: "Incorrect email or password" });
     }
@@ -133,4 +132,36 @@ const updateProfile = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, logoutUser, getUserProfile, updateProfile };
+const makeInstructor = async (req, res) => {
+  try {
+    const userId = req.id;
+    const { questionOne, questionTwo, category, agreeToTerms } = req.body;
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        role: "instructor",
+        questionOne: questionOne,
+        questionTwo: questionTwo,
+        courseCategory: category,
+        agreeToTerms: agreeToTerms,
+      },
+      { new: true }
+    );
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ ok: true });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Failed to fetch user" });
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUserProfile,
+  updateProfile,
+  makeInstructor,
+};
