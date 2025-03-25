@@ -45,8 +45,6 @@ function Profile() {
         await onUpdate(formData);
     }
 
-    console.log(user);
-
     useEffect(() => {
         if (isSuccess) {
             if (!data?.user) toast.error(data?.message ?? "Something went wrong!", { id: 4 });
@@ -72,15 +70,15 @@ function Profile() {
                         <p className="text-xl font-semibold">Edit Profile</p>
                         <p className="text-base text-gray-400">Make changes to your profile here. Click save when you're done.</p>
                     </div>
-                    <form action="" className="flex-col" onSubmit={onSubmit}>
+                    <form action="" className="flex-col w-full" onSubmit={onSubmit}>
                         <div className="flex flex-col items-center w-full gap-5">
-                            <div className="flex items-center justify-between w-full">
-                                <p className="text-lg font-semibold w-[30%]">Name</p>
-                                <input type="text" id="name" name="name" className="text-base focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 focus:dark:outline-gray-400 focus:outline-black w-[70%]  px-3 py-2 placeholder:dark:text-gray-400 placeholder:text-gray-500" placeholder="Name" value={name} onChange={inputHandler} />
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full">
+                                <p className="text-lg font-semibold sm:w-[30%] w-full">Name</p>
+                                <input type="text" id="name" name="name" className="text-base focus:outline-2 outline-1 outline rounded-md outline-gray-300 dark:outline-gray-600 bg-white dark:bg-gray-800 focus:dark:outline-gray-400 focus:outline-black sm:w-[70%] w-full px-3 py-2 placeholder:dark:text-gray-400 placeholder:text-gray-500" placeholder="Name" value={name} onChange={inputHandler} />
                             </div>
-                            <div className="flex items-center justify-between w-full">
-                                <p className="text-lg font-semibold w-[30%]">Profile Photo</p>
-                                <input type="file" id="photo" accept="image/*" name="photo" className="w-[70%] outline outline-1 outline-gray-300 dark:outline-gray-600 rounded-md px-3 py-2 file:bg-white file:dark:bg-gray-800 file:border-none file:font-semibold file:underline file:cursor-pointer file:dark:text-white dark:text-gray-400 text-gray-500 " onChange={fileHandler} />
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full">
+                                <p className="text-lg font-semibold sm:w-[30%] w-full">Profile Photo</p>
+                                <input type="file" id="photo" accept="image/*" name="photo" className="sm:w-[70%] w-full outline outline-1 outline-gray-300 dark:outline-gray-600 rounded-md px-3 py-2 file:bg-white file:dark:bg-gray-800 file:border-none file:font-semibold file:underline file:cursor-pointer file:dark:text-white dark:text-gray-400 text-gray-500 " onChange={fileHandler} />
                             </div>
                         </div>
                         <div className="text-end w-full mt-5">
